@@ -1,0 +1,5 @@
+package com.example.pandora.model.response;
+
+public class ResponseDTO {
+
+}

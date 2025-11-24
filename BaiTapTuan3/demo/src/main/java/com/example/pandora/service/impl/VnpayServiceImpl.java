@@ -1,0 +1,196 @@
+package com.example.pandora.service.impl;
+
+import com.example.pandora.model.Order;
+import com.example.pandora.model.Transaction;
+import com.example.pandora.model.User;
+import com.example.pandora.model.request.TransactionCreateRequest;
+import com.example.pandora.model.response.ResponseDTO;
+import com.example.pandora.repository.OrderRepository;
+import com.example.pandora.repository.TransactionRepository;
+import com.example.pandora.repository.UserRepository;
+import com.example.pandora.service.VnpayService;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+@Service
+public class VnpayServiceImpl implements VnpayService {
+
+    @Value("${vnpay.tmnCode}")
+    private String tmnCode;
+
+    @Value("${vnpay.hashSecret}")
+    private String hashSecret;
+
+    @Value("${vnpay.returnUrl}")
+    private String returnUrl;
+
+    @Value("${vnpay.payUrl}")
+    private String payUrl;
+
+    private final TransactionRepository transactionRepository;
+    private final UserRepository userRepository;
+    private final OrderRepository orderRepository;
+
+    public VnpayServiceImpl(TransactionRepository transactionRepository,
+                            UserRepository userRepository,
+                            OrderRepository orderRepository) {
+        this.transactionRepository = transactionRepository;
+        this.userRepository = userRepository;
+        this.orderRepository = orderRepository;
+    }
+
+    @PostConstruct
+    private void cleanConfig() {
+        tmnCode = tmnCode.trim();
+        hashSecret = hashSecret.trim();
+        returnUrl = returnUrl.trim();
+        payUrl = payUrl.trim();
+    }
+
+    private static String getDateNow() {
+        return new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+    }
+
+    private static String getExpireDate() {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MINUTE, 15);
+        return new SimpleDateFormat("yyyyMMddHHmmss").format(cal.getTime());
+    }
+
+    private static String hmacSHA512(String key, String data) throws Exception {
+        Mac hmac = Mac.getInstance("HmacSHA512");
+        SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "HmacSHA512");
+        hmac.init(secretKey);
+        byte[] hash = hmac.doFinal(data.getBytes(StandardCharsets.UTF_8));
+
+        StringBuilder sb = new StringBuilder();
+        for (byte b : hash) sb.append(String.format("%02x", b));
+        return sb.toString();
+    }
+
+    private static String buildQuery(Map<String, String> params) throws Exception {
+        StringBuilder sb = new StringBuilder();
+        for (String key : params.keySet()) {
+            String value = params.get(key);
+            if (value != null && !value.isEmpty()) {
+                sb.append(URLEncoder.encode(key, StandardCharsets.UTF_8));
+                sb.append("=");
+                sb.append(URLEncoder.encode(value, StandardCharsets.UTF_8));
+                sb.append("&");
+            }
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        return sb.toString();
+    }
+
+    @Override
+    public ResponseDTO createPayment(TransactionCreateRequest req) {
+        try {
+            User user = userRepository.findById(req.getUserId())
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+
+            // Tạo transaction
+            Transaction tx = new Transaction();
+            tx.setAmount(req.getAmount());
+            tx.setUser(user);
+            tx.setOrderId(req.getOrderId());
+            tx.setStatus("PENDING");
+            tx.setNote(req.getNote());
+            tx.setCreatedDate(new Date());
+            tx = transactionRepository.save(tx);
+
+            // Build params
+            SortedMap<String, String> params = new TreeMap<>();
+            params.put("vnp_Version", "2.1.0");
+            params.put("vnp_Command", "pay");
+            params.put("vnp_TmnCode", tmnCode);
+            params.put("vnp_Amount", String.valueOf(tx.getAmount() * 100));
+            params.put("vnp_CurrCode", "VND");
+            params.put("vnp_TxnRef", String.valueOf(tx.getId()));
+            params.put("vnp_OrderInfo", "Thanh toan don hang #" + tx.getOrderId());
+            params.put("vnp_OrderType", "other");     // BẮT BUỘC
+            params.put("vnp_Locale", "vn");
+            params.put("vnp_IpAddr", "127.0.0.1");
+            params.put("vnp_ReturnUrl", returnUrl);
+            params.put("vnp_CreateDate", getDateNow());
+            params.put("vnp_ExpireDate", getExpireDate()); // BẮT BUỘC
+            params.put("vnp_SecureHashType", "HmacSHA512"); // BẮT BUỘC
+
+            // Build query before hash
+            String rawData = buildQuery(params);
+            String secureHash = hmacSHA512(hashSecret, rawData);
+
+            String paymentUrl = payUrl + "?" + rawData + "&vnp_SecureHash=" + secureHash;
+
+            return ResponseDTO.ok(paymentUrl);
+
+        } catch (Exception e) {
+            return ResponseDTO.fail("failed", e.getMessage());
+        }
+    }
+
+    @Override
+    public ResponseDTO handleReturn(Map<String, String> params) {
+        try {
+            String receivedHash = params.get("vnp_SecureHash");
+
+            // Remove hash fields
+            SortedMap<String, String> verify = new TreeMap<>(params);
+            verify.remove("vnp_SecureHash");
+            verify.remove("vnp_SecureHashType");
+
+            String rawData = buildQuery(verify);
+            String calculatedHash = hmacSHA512(hashSecret, rawData);
+
+            if (!calculatedHash.equalsIgnoreCase(receivedHash)) {
+                return ResponseDTO.fail("Invalid checksum", "Signature mismatch");
+            }
+
+            Long txnId = Long.valueOf(params.get("vnp_TxnRef"));
+            String responseCode = params.get("vnp_ResponseCode");
+
+            Transaction tx = transactionRepository.findById(txnId)
+                    .orElseThrow(() -> new RuntimeException("Transaction not found"));
+
+            Order order = (tx.getOrderId() != null)
+                    ? orderRepository.findById(tx.getOrderId()).orElse(null)
+                    : null;
+
+            if ("00".equals(responseCode)) {
+                tx.setStatus("SUCCESS");
+                if (order != null) {
+                    order.setStatus("CUSTOMER_PAID");
+                    orderRepository.save(order);
+                }
+            } else {
+                tx.setStatus("FAILED");
+                if (order != null) {
+                    order.setStatus("PAYMENT_FAILED");
+                    orderRepository.save(order);
+                }
+            }
+
+            tx.setVnpTxnRef(params.get("vnp_TransactionNo"));
+            tx.setModifiedDate(new Date());
+            transactionRepository.save(tx);
+
+            Map<String, Object> result = new HashMap<>();
+            result.put("transaction", tx);
+            result.put("orderId", tx.getOrderId());
+            result.put("orderStatus", order != null ? order.getStatus() : null);
+
+            return ResponseDTO.ok(result);
+
+        } catch (Exception e) {
+            return ResponseDTO.fail("failed", e.getMessage());
+        }
+    }
+}

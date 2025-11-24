@@ -1,0 +1,5 @@
+package com.example.pandora.model.request;
+
+public class ReviewRequest {
+
+}

@@ -1,0 +1,34 @@
+package com.example.pandora.model.response;
+
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class ResponseDTO {
+
+    private boolean success;   // true / false
+    private String message;    // mô tả ngắn
+    private Object data;       // dữ liệu trả về (URL, object...)
+    private String error;      // mô tả chi tiết lỗi (nếu có)
+
+    public ResponseDTO() {}
+
+    public ResponseDTO(boolean success, String message, Object data, String error) {
+        this.success = success;
+        this.message = message;
+        this.data = data;
+        this.error = error;
+    }
+
+    // Hàm tiện lợi
+    public static ResponseDTO ok(Object data) {
+        return new ResponseDTO(true, "success", data, null);
+    }
+
+    public static ResponseDTO fail(String message, String error) {
+        return new ResponseDTO(false, message, null, error);
+    }
+}
+

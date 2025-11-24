@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout.html}">
+
+<head>
+    <title>Thanh toán thành công</title>
+</head>
+
+<body>
+<main layout:fragment="content" class="py-5 bg-light text-center">
+    <div class="container">
+        <div class="alert alert-success shadow-sm p-5 rounded-4">
+            <h2 class="mb-3 fw-bold">✅ Thanh toán thành công!</h2>
+            <p class="fs-5">Cảm ơn bạn đã sử dụng dịch vụ của <strong>SkyLand Real Estate</strong>.</p>
+            <p class="text-muted">Chúng tôi sẽ liên hệ với bạn sớm nhất để xác nhận chi tiết giao dịch.</p>
+            <a th:href="@{'/api/payment/receipt/' + ${transactionInfo.txnRef}}"
+			   class="btn btn-success mt-4" target="_blank">
+			   📄 Tải biên lai thanh toán
+			</a>
+            
+            <a th:href="@{/}" class="btn btn-success mt-3 px-4">Quay về trang chủ</a>
+        </div>
+    </div>
+</main>
+</body>
+</html>

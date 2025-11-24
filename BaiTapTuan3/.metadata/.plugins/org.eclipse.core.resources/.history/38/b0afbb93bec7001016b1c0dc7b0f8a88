@@ -1,0 +1,24 @@
+package com.example.pandora.api;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.pandora.model.request.TransactionCreateRequest;
+import com.example.pandora.model.response.ResponseDTO;
+import com.example.pandora.service.VnpayService;
+
+@RestController
+@RequestMapping("/api/payment")
+public class PaymentAPI {
+
+    @Autowired
+    private VnpayService vnpayService;
+
+    @PostMapping("/create")
+    public ResponseDTO createPayment(@RequestBody TransactionCreateRequest req) {
+        return vnpayService.createPayment(req);
+    }
+}

@@ -1,0 +1,31 @@
+spring.application.name=demo
+spring.datasource.url=jdbc:postgresql://localhost:5432/pandora
+spring.datasource.username=postgres
+spring.datasource.password=123456
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+# Cho phép điện thoại thật truy cập
+server.address=0.0.0.0
+server.port=8080
+# Cloudinary
+cloudinary.cloud_name=dnbxsm1mx
+cloudinary.api_key=329513356252861
+cloudinary.api_secret=PC_sIT6yaw-3fWy9jFKsMMbKTHA
+spring.websocket.enabled=true
+spring.main.allow-circular-references=true
+#Mailsender
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=lamssdd910@gmail.com
+spring.mail.password=znqymqttykjkzmau
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+vnpay.tmnCode=E782UYRX
+vnpay.hashSecret=URJVND7UIEXNLZRKIQ50XDOYFRB10G0F
+vnpay.payUrl=https://sandbox.vnpayment.vn/paymentv2/vpcpay.html
+
+# VNPay sandbox chỉ chấp nhận localhost
+vnpay.returnUrl=http://localhost:8080/api/payment/vnpay_return
