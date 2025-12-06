@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Pandora" parent="Theme.Material3.Light.NoActionBar">
+
+        <!-- PRIMARY -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/onPrimary</item>
+        <item name="colorPrimaryContainer">@color/primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/onPrimaryContainer</item>
+
+        <!-- SECONDARY -->
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/onSecondary</item>
+        <item name="colorSecondaryContainer">@color/secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/onSecondaryContainer</item>
+
+        <!-- TERTIARY -->
+        <item name="colorTertiary">@color/tertiary</item>
+        <item name="colorOnTertiary">@color/onTertiary</item>
+        <item name="colorTertiaryContainer">@color/tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/onTertiaryContainer</item>
+
+        <!-- SURFACE / BACKGROUND CHUẨN M3 -->
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/onSurface</item>
+
+        <!-- Nếu bạn MUỐN ép background của Activity -->
+        <item name="android:colorBackground">@color/background</item>
+
+        <!-- OUTLINE -->
+        <item name="colorOutline">@color/outline</item>
+
+        <!-- ERROR -->
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/onError</item>
+
+        <!-- STATUS BAR -->
+        <item name="android:statusBarColor">@color/primary</item>
+
+        <!-- NAVIGATION BAR -->
+        <item name="android:navigationBarColor">@color/navigationBar</item>
+
+        <!-- DISABLE ACTION BAR -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+
+    </style>
+
+</resources>

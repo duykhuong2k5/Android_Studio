@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <include
+            layout="@layout/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="VỀ PANDORA"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:layout_marginBottom="16dp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/charm1"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pandora là thương hiệu trang sức nổi tiếng đến từ Đan Mạch, được biết đến với những thiết kế tinh xảo và mang ý nghĩa đặc biệt. Mỗi sản phẩm Pandora đều kể một câu chuyện riêng, thể hiện cá tính và cảm xúc của người đeo."
+            android:textColor="#444444"
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tại Pandora, chúng tôi tôn vinh vẻ đẹp và sự tự tin của phụ nữ thông qua những bộ sưu tập độc đáo, sang trọng và đầy cảm hứng."
+            android:textColor="#444444"
+            android:textSize="16sp" />
+        <!-- Footer -->
+        <include
+            layout="@layout/layout_footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</ScrollView>

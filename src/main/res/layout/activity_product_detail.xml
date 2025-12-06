@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ProductDetailActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- SCROLL VIEW -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- HEADER -->
+            <include
+                android:id="@+id/headerInclude"
+                layout="@layout/header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- IMAGE SLIDER -->
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPagerImages"
+                android:layout_width="0dp"
+                android:layout_height="320dp"
+                android:layout_marginTop="12dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                app:layout_constraintTop_toBottomOf="@id/headerInclude"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- TAB INDICATOR -->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:minHeight="0dp"
+                app:tabIndicatorColor="@android:color/transparent"
+                app:tabIndicatorHeight="0dp"
+                app:tabGravity="center"
+                app:tabBackground="@drawable/tab_selector"
+                app:tabRippleColor="@android:color/transparent"
+                app:layout_constraintTop_toBottomOf="@id/viewPagerImages"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- CARD: NAME + PRICE -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="1dp"
+                app:strokeColor="@color/outline"
+                app:strokeWidth="1dp"
+                app:layout_constraintTop_toBottomOf="@id/tabIndicator"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvProductNameDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tên sản phẩm"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:textColor="@color/onSurface" />
+
+                    <TextView
+                        android:id="@+id/tvProductPriceDetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="0₫"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="@color/primary" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- CARD: CHỌN SIZE -->
+            <!-- CARD: CHỌN SIZE -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardSize"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="16dp"
+                app:strokeColor="@color/outline"
+                app:strokeWidth="1dp"
+                app:cardElevation="1dp"
+                app:layout_constraintTop_toBottomOf="@id/cardPrice"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- dòng tiêu đề + nút + -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/tvSizeTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="CHỌN SIZE"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="@color/onSurface" />
+
+                        <ImageView
+                            android:id="@+id/ivToggleSize"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_add_24"
+                            android:tint="@color/onSurface" />
+                    </LinearLayout>
+
+                    <!-- bảng size – mặc định GONE -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerSizes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:nestedScrollingEnabled="false"
+                        android:visibility="gone"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+
+            <!-- CARD: ACTION BUTTONS -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardActions"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="16dp"
+                app:strokeColor="@color/outline"
+                app:strokeWidth="1dp"
+                app:cardElevation="1dp"
+                app:layout_constraintTop_toBottomOf="@id/cardSize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:orientation="vertical">
+
+                    <!-- BUY NOW BUTTON -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnBuyNow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="MUA NGAY"
+                        android:textAllCaps="false"
+                        style="@style/Button.PinkFilled.Pill" />
+
+                    <!-- ADD TO CART BUTTON -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnAddToCart"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="THÊM VÀO GIỎ"
+                        android:textAllCaps="false"
+                        style="@style/Button.PinkOutlined.Pill" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- CARD: PRODUCT DETAILS -->
+            <!-- CARD: PRODUCT DETAILS -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardDetail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="16dp"
+                app:strokeColor="@color/outline"
+                app:strokeWidth="1dp"
+                app:cardElevation="1dp"
+                app:layout_constraintTop_toBottomOf="@id/cardActions"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="CHI TIẾT SẢN PHẨM"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/onSurface"/>
+
+                    <!-- ❗ Thay TextView cũ bằng LinearLayout container -->
+                    <LinearLayout
+                        android:id="@+id/containerDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <!-- CARD: POLICY -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardPolicy"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="16dp"
+                app:strokeColor="@color/outline"
+                app:strokeWidth="1dp"
+                app:cardElevation="1dp"
+                app:layout_constraintTop_toBottomOf="@id/cardDetail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="CHÍNH SÁCH GIAO HÀNG - ĐỔI TRẢ"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/onSurface"/>
+
+                    <TextView
+                        android:id="@+id/tvPolicy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Pandora miễn phí vận chuyển..."
+                        android:textSize="14sp"
+                        android:textColor="@color/onSurfaceVariant"
+                        android:lineSpacingExtra="4dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- CARD: COMPATIBILITY -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardCompat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="16dp"
+                app:strokeColor="@color/outline"
+                app:strokeWidth="1dp"
+                app:cardElevation="1dp"
+                app:layout_constraintTop_toBottomOf="@id/cardPolicy"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="TÍNH TƯƠNG THÍCH"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/onSurface"/>
+
+                    <ImageView
+                        android:id="@+id/imgCompatibility"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_marginTop="8dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/charmrua"/>
+
+                    <TextView
+                        android:id="@+id/tvCompatibilityText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Phù hợp với vòng Pandora Moments..."
+                        android:textSize="14sp"
+                        android:textColor="@color/onSurfaceVariant"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- RELATED TITLE -->
+            <TextView
+                android:id="@+id/titleRelated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="SẢN PHẨM CÙNG LOẠI"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/onSurface"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/cardCompat"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- RELATED PRODUCTS LIST -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerRelatedProducts"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:paddingHorizontal="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/titleRelated"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+            <!-- CARD: REVIEWS -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardReviews"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:cardCornerRadius="16dp"
+                app:strokeColor="@color/outline"
+                app:strokeWidth="1dp"
+                app:cardElevation="1dp"
+                app:layout_constraintTop_toBottomOf="@id/recyclerRelatedProducts"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ĐÁNH GIÁ - NHẬN XÉT"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/onSurface"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/tvReviews"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Chưa có đánh giá nào"
+                        android:textColor="@color/primary"
+                        android:textSize="14sp"
+                        android:gravity="center"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <!-- LIST OF REVIEWS -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerReviews"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:layout_marginTop="12dp"
+                app:layout_constraintTop_toBottomOf="@id/cardReviews"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+            <!-- CARD: WRITE REVIEW -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardWriteReview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:cardCornerRadius="16dp"
+                app:strokeColor="@color/outline"
+                app:strokeWidth="1dp"
+                app:cardElevation="1dp"
+                app:layout_constraintTop_toBottomOf="@id/recyclerReviews"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="VIẾT ĐÁNH GIÁ CỦA BẠN"
+                        android:textStyle="bold"
+                        android:textColor="@color/onSurface"
+                        android:textSize="16sp"
+                        android:gravity="center"/>
+
+                    <!-- RATING BAR -->
+                    <RatingBar
+                        android:id="@+id/ratingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:stepSize="1"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="12dp"
+                        android:progressTint="@color/ratingStar"
+                        android:secondaryProgressTint="@color/ratingStar"
+                        android:progressBackgroundTint="#DDDDDD" />
+
+                    <!-- REVIEW INPUT -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:boxBackgroundMode="outline"
+                        app:boxStrokeColor="@color/primary">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etReviewContent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="80dp"
+                            android:hint="Chia sẻ cảm nhận của bạn..."
+                            android:gravity="top"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- SUBMIT BUTTON -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSubmitReview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="GỬI ĐÁNH GIÁ"
+                        android:textAllCaps="false"
+                        android:layout_marginTop="16dp"
+                        style="@style/Button.PinkFilled.Pill"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- FOOTER -->
+            <include
+                android:id="@+id/footerInclude"
+                layout="@layout/layout_footer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:layout_constraintTop_toBottomOf="@id/cardWriteReview"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- FLOATING CHAT -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnChatSupport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="24dp"
+        android:src="@drawable/ic_chat"
+        app:backgroundTint="@color/primary"
+        app:tint="@android:color/white" />
+
+</FrameLayout>

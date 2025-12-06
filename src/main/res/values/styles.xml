@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ===== PUBLIC APP BUTTONS (Luxury Pink) ===== -->
+
+    <!-- Shape bo tròn 50% -->
+    <style name="Shape.Pill">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <!-- Nút hồng đậm (Filled) -->
+    <style name="Button.PinkFilled.Pill" parent="Widget.Material3.Button">
+        <item name="shapeAppearanceOverlay">@style/Shape.Pill</item>
+        <item name="backgroundTint">@color/primary</item>
+        <item name="android:textColor">@color/onPrimary</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- Nút viền hồng (Outlined) -->
+    <style name="Button.PinkOutlined.Pill" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="shapeAppearanceOverlay">@style/Shape.Pill</item>
+        <item name="strokeColor">@color/primary</item>
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- ===== ADMIN BUTTONS (Purple Admin UI) ===== -->
+
+    <!-- Shape bo tròn nhẹ cho admin -->
+    <style name="AdminButtonShape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+
+    <style name="AdminButtonStyle" parent="Widget.Material3.Button">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">16sp</item>
+
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+
+        <!-- Nền tím admin -->
+        <item name="backgroundTint">@color/purple_700</item>
+
+        <!-- Bo góc -->
+        <item name="shapeAppearanceOverlay">@style/AdminButtonShape</item>
+
+        <!-- Hiệu ứng nhấn -->
+        <item name="android:elevation">4dp</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+    </style>
+    <style name="Shape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+    <style name="NoShape">
+        <item name="shapeAppearanceMediumComponent">@null</item>
+        <item name="android:colorControlNormal">@null</item>
+        <item name="android:colorControlHighlight">@android:color/transparent</item>
+    </style>
+
+
+
+</resources>

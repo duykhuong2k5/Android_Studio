@@ -1,0 +1,8 @@
+<resources>
+    <string-array name="order_statuses">
+        <item>PENDING</item>
+        <item>SHIPPING</item>
+        <item>COMPLETED</item>
+        <item>CANCELLED</item>
+    </string-array>
+</resources>

@@ -1,0 +1,74 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edtFullName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Họ và tên"/>
+
+        <EditText
+            android:id="@+id/edtPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Số điện thoại"
+            android:inputType="phone"/>
+
+        <EditText
+            android:id="@+id/edtHouse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Số nhà / xóm"/>
+
+        <EditText
+            android:id="@+id/edtStreet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Đường / thôn"/>
+
+        <EditText
+            android:id="@+id/edtWard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Phường / xã"/>
+
+        <EditText
+            android:id="@+id/edtDistrict"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Quận / huyện"/>
+
+        <EditText
+            android:id="@+id/edtProvince"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tỉnh / thành phố"/>
+
+        <EditText
+            android:id="@+id/edtNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ghi chú (không bắt buộc)"/>
+
+        <CheckBox
+            android:id="@+id/chkDefault"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đặt làm mặc định"
+            android:paddingTop="10dp"/>
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lưu địa chỉ"
+            android:layout_marginTop="16dp"/>
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Tên sản phẩm -->
+    <EditText
+        android:id="@+id/edtProductName"
+        android:hint="Tên sản phẩm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Giảm giá -->
+    <EditText
+        android:id="@+id/edtProductDiscount"
+        android:hint="Giảm giá (vd: -20%)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Giá mới -->
+    <EditText
+        android:id="@+id/edtProductPrice"
+        android:hint="Giá mới"
+        android:inputType="numberDecimal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Giá cũ -->
+    <EditText
+        android:id="@+id/edtProductPriceOld"
+        android:hint="Giá cũ (VNĐ)"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- URL hình ảnh -->
+    <EditText
+        android:id="@+id/edtProductImage"
+        android:hint="URL hình ảnh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Danh mục sản phẩm (Dropdown Spinner) -->
+    <Spinner
+        android:id="@+id/spinnerCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Mô tả sản phẩm -->
+    <EditText
+        android:id="@+id/edtProductDescription"
+        android:hint="Mô tả sản phẩm"
+        android:inputType="textMultiLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="100dp"
+        android:gravity="top|start"
+        android:padding="12dp"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Chính sách vận chuyển -->
+    <EditText
+        android:id="@+id/edtShippingPolicy"
+        android:hint="Chính sách vận chuyển"
+        android:inputType="textMultiLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="100dp"
+        android:gravity="top|start"
+        android:padding="12dp"
+        android:layout_marginBottom="8dp"/>
+
+</LinearLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Chấm được chọn -->
+    <item android:state_selected="true">
+        <shape android:shape="oval">
+            <size android:width="5dp" android:height="5dp" /> <!-- 👈 nhỏ hơn -->
+            <solid android:color="#222222" />
+        </shape>
+    </item>
+
+    <!-- Chấm chưa được chọn -->
+    <item>
+        <shape android:shape="oval">
+            <size android:width="5dp" android:height="5dp" />
+            <solid android:color="#E0E0E0" />
+        </shape>
+    </item>
+</selector>

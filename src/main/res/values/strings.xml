@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Pandora</string>
+    <string-array name="sort_options">
+        <item>Sản phẩm nổi bật</item>
+        <item>Giá tăng dần</item>
+        <item>Giá giảm dần</item>
+        <item>Mới nhất</item>
+    </string-array>
+</resources>

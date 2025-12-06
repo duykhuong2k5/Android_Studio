@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/primaryContainer">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <!-- Header -->
+        <include
+            layout="@layout/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Title -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GIỎ HÀNG"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginVertical="16dp"
+            android:textColor="@color/onSurface" />
+
+        <!-- PRODUCT LIST -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:padding="12dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="1dp"
+            app:strokeWidth="0dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerCart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- PAYMENT METHOD -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:padding="16dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="1dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Phương thức thanh toán"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="12dp"
+                    android:textColor="@color/onSurface" />
+
+                <RadioGroup
+                    android:id="@+id/radioPaymentMethod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/radioCOD"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Thanh toán khi nhận hàng (COD)"
+                        android:checked="true"
+                        android:textColor="@color/onSurface" />
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/radioVnPay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Thanh toán VNPay Online"
+                        android:textColor="@color/onSurface" />
+
+                </RadioGroup>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnVoucher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chọn voucher"
+            android:textAllCaps="false"
+            android:layout_marginBottom="12dp"
+            app:backgroundTint="@color/tertiaryContainer"
+            app:cornerRadius="50dp"
+            android:textColor="@color/onTertiaryContainer"/>
+
+
+        <!-- SUMMARY -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:padding="16dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="1dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvSubtotal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tổng tiền hàng: 0₫"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="6dp"
+                    android:textColor="@color/onSurface" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvShippingFee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Phí vận chuyển: 0₫"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="6dp"
+                    android:textColor="@color/onSurface" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvDiscount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Giảm giá: 0₫"
+                    android:textSize="16sp"
+                    android:textColor="@color/secondary"
+                    android:layout_marginBottom="6dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/outline"
+                    android:layout_marginVertical="12dp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvTotalPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tổng cộng: 0₫"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:gravity="end"
+                    android:textColor="@color/onSurface" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- BUTTON: THANH TOÁN TẤT CẢ -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCheckout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="THANH TOÁN TẤT CẢ"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:paddingVertical="14dp"
+            android:layout_marginBottom="12dp"
+            android:textColor="@color/onPrimary"
+            app:cornerRadius="50dp"
+            app:backgroundTint="@color/primary" />
+
+        <!-- BUTTON: THANH TOÁN ĐÃ CHỌN -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCheckoutSelected"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="THANH TOÁN SẢN PHẨM ĐÃ CHỌN"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:paddingVertical="14dp"
+            android:textColor="@color/primary"
+            app:cornerRadius="50dp"
+            app:strokeColor="@color/primary"
+            app:strokeWidth="2dp"
+            app:backgroundTint="@android:color/transparent" />
+
+        <!-- Footer -->
+        <include
+            layout="@layout/layout_footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</ScrollView>

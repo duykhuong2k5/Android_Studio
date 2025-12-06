@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="300dp"
+    android:height="180dp"
+    android:viewportWidth="300"
+    android:viewportHeight="180">
+
+    <!-- Background -->
+    <path
+        android:fillColor="#E8ECF0"
+        android:pathData="M0,0h300v180h-300z" />
+
+    <!-- Random roads (thin lines) -->
+    <path
+        android:strokeWidth="2"
+        android:strokeColor="#C7D1DA"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M10,20 L280,20" />
+
+    <path
+        android:strokeWidth="2"
+        android:strokeColor="#C7D1DA"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M30,60 L260,150" />
+
+    <path
+        android:strokeWidth="2"
+        android:strokeColor="#C7D1DA"
+        android:pathData="M50,140 L200,40" />
+
+    <path
+        android:strokeWidth="2"
+        android:strokeColor="#C7D1DA"
+        android:pathData="M100,10 L100,170" />
+
+    <!-- Markers -->
+    <path
+        android:fillColor="#2D9CDB"
+        android:pathData="M140,40 a6,6 0 1,1 -12,0 a6,6 0 1,1 12,0" />
+
+    <path
+        android:fillColor="#EB5757"
+        android:pathData="M200,100 a6,6 0 1,1 -12,0 a6,6 0 1,1 12,0" />
+
+    <path
+        android:fillColor="#6FCF97"
+        android:pathData="M80,120 a6,6 0 1,1 -12,0 a6,6 0 1,1 12,0" />
+
+</vector>

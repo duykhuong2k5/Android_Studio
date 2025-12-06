@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFA"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingBottom="8dp">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_arrow_back"
+                android:tint="#000000"
+                android:contentDescription="Quay lại" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chi tiết đơn hàng"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+
+        <!-- Thông tin đơn hàng -->
+        <TextView
+            android:id="@+id/tvOrderInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Đơn hàng #123\nTrạng thái: Đã thanh toán\nNgày đặt: 10/11/2025"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:padding="10dp"
+            android:background="@drawable/bg_card"
+            android:layout_marginBottom="10dp" />
+
+        <!-- Danh sách sản phẩm -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerOrderItems"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:layout_marginBottom="10dp" />
+
+        <!-- Ngày giao dự kiến -->
+        <TextView
+            android:id="@+id/tvDeliveryDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🚚 Ngày giao dự kiến: ..."
+            android:textColor="#FF9800"
+            android:textStyle="italic"
+            android:textSize="14sp"
+            android:layout_marginBottom="6dp" />
+
+        <!-- Tổng cộng -->
+        <TextView
+            android:id="@+id/tvTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tổng cộng: 0₫"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:gravity="end"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:id="@+id/tvAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Địa chỉ nhận hàng"
+            android:textColor="#000"
+            android:textSize="14sp"
+            android:padding="10dp"
+            android:background="@drawable/bg_card"
+            android:layout_marginBottom="10dp" />
+
+        <Button
+            android:id="@+id/btnCancelOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hủy đơn hàng"
+            android:textAllCaps="false"
+            android:backgroundTint="#F44336"
+            android:textColor="#FFFFFF"
+            android:padding="12dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp" />
+
+
+        <!-- Lời cảm ơn -->
+        <TextView
+            android:id="@+id/tvThankYou"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🎉 Cảm ơn bạn đã mua sắm tại Taccy Le’s!"
+            android:textColor="#444"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_marginTop="6dp" />
+
+        <!-- Ghi chú phụ -->
+        <TextView
+            android:id="@+id/tvNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Đơn hàng sẽ được giao trong 3 ngày kể từ ngày đặt.\nMọi thắc mắc vui lòng liên hệ hotline: 1900 1234."
+            android:textColor="#777"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:layout_marginTop="6dp" />
+
+        <!-- Dòng thương hiệu -->
+        <TextView
+            android:id="@+id/tvBrand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="✨ Taccy Le’s – Trang sức tinh tế, tỏa sáng mỗi ngày ✨"
+            android:textColor="#A0A0A0"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_marginTop="10dp" />
+
+    </LinearLayout>
+</ScrollView>

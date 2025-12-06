@@ -1,5 +1,0 @@
-package com.example.pandora.dto;
-
-public class LoginRequest {
-
-}

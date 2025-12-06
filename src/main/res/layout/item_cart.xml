@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:gravity="center_vertical"
+    android:background="@color/surface"
+    android:layout_marginBottom="8dp">
+
+    <!-- Ô chọn sản phẩm -->
+    <CheckBox
+        android:id="@+id/checkSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/secondary"
+        android:layout_marginEnd="8dp" />
+
+    <!-- Ảnh sản phẩm -->
+    <ImageView
+        android:id="@+id/imgProduct"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:scaleType="fitCenter"
+        android:layout_marginEnd="12dp"
+        android:contentDescription="Ảnh sản phẩm" />
+
+    <!-- Thông tin sản phẩm -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!-- Tên -->
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hoa Tai Bạc"
+            android:textStyle="bold"
+            android:textColor="@color/onSurface"
+            android:textSize="16sp" />
+
+        <!-- Giá -->
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2.190.000₫"
+            android:textColor="@color/primary"
+            android:textSize="15sp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Khối chỉnh số lượng -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Số lượng:"
+                android:textSize="14sp"
+                android:textColor="@color/onSurface"
+                android:layout_marginEnd="6dp" />
+
+            <!-- Nút giảm -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnMinus"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:padding="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp"
+                app:cornerRadius="18dp"
+                app:backgroundTint="@color/primary"
+                app:icon="@drawable/ic_minus"
+                app:iconTint="@color/onPrimary" />
+
+            <!-- Số lượng -->
+            <TextView
+                android:id="@+id/tvQuantity"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="1"
+                android:textSize="16sp"
+                android:textColor="@color/onSurface"
+                android:layout_marginHorizontal="4dp" />
+
+            <!-- Nút tăng -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPlus"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:padding="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp"
+                app:cornerRadius="18dp"
+                app:backgroundTint="@color/primary"
+                app:icon="@drawable/ic_add"
+                app:iconTint="@color/onPrimary" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Nút xóa -->
+    <ImageButton
+        android:id="@+id/btnRemove"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_close"
+        android:tint="@color/onSurface"
+        android:contentDescription="Xóa sản phẩm" />
+
+</LinearLayout>
