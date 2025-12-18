@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Bông tuyết – viền đậm để không bị chìm vào nền -->
+    <path
+        android:strokeColor="#0277BD"
+        android:strokeWidth="2"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M12,2 L12,22
+        M4.5,5 L19.5,19
+        M19.5,5 L4.5,19
+        M2,12 L22,12" />
+
+    <!-- Bông tuyết bên trong -->
+    <path
+        android:strokeColor="#01579B"
+        android:strokeWidth="2"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M12,7 L12,17
+        M7,12 L17,12" />
+</vector>

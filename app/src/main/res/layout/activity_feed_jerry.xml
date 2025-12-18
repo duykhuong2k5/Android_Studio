@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#F6F7FB"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- TARGET WORD -->
+    <TextView
+        android:id="@+id/tvTarget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="APPLE"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:textColor="#111827"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="24dp"/>
+
+    <!-- JERRY -->
+    <ImageView
+        android:id="@+id/imgJerry"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_jerry_big"
+        android:scaleType="centerInside"/>
+
+    <!-- TOM POPUP -->
+    <ImageView
+        android:id="@+id/imgTom"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_tom_angry"
+        android:visibility="gone"/>
+
+    <!-- FOOD LAYER -->
+    <FrameLayout
+        android:id="@+id/foodLayer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</FrameLayout>

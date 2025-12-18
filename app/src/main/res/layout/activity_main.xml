@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#F6F7FB"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvHello"
+        android:text="Home"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvSub"
+        android:text="Pick a fun activity to learn English!"
+        android:textSize="14sp"
+        android:alpha="0.8"
+        android:paddingTop="6dp"
+        android:paddingBottom="14dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- CARD 1: Tom & Jerry -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardTomJerry"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginBottom="14dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="6dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="#E8EAF3"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="12dp">
+
+            <!-- Left image block -->
+            <FrameLayout
+                android:id="@+id/leftBlockTom"
+                android:layout_width="96dp"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_card_left_orange"
+                android:clipToOutline="true"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:id="@+id/imgTomJerry"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/the1tomjerry"
+                    android:contentDescription="Tom Jerry"/>
+            </FrameLayout>
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/tvTagTom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TOM  JERRY"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:background="@drawable/bg_chip"
+                android:textColor="#2E2E2E"
+                app:layout_constraintStart_toEndOf="@id/leftBlockTom"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="12dp"/>
+
+            <TextView
+                android:id="@+id/tvTitleTom"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Tom Jerry Mini Games"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#111827"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@id/leftBlockTom"
+                app:layout_constraintTop_toBottomOf="@id/tvTagTom"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/tvDescTom"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Feed Jerry, catch food, hide fruits…"
+                android:textSize="13sp"
+                android:textColor="#6B7280"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toEndOf="@id/leftBlockTom"
+                app:layout_constraintTop_toBottomOf="@id/tvTitleTom"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/tvActionTom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start →"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="#2563EB"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="6dp"
+                app:layout_constraintStart_toEndOf="@id/leftBlockTom"
+                app:layout_constraintTop_toBottomOf="@id/tvDescTom"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!--&lt;!&ndash; CARD 2: AI Coach &ndash;&gt;
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardAiCoach"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="6dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="#E8EAF3"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="12dp">
+
+            &lt;!&ndash; Left image block &ndash;&gt;
+            <FrameLayout
+                android:id="@+id/leftBlockAi"
+                android:layout_width="96dp"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_card_left_blue"
+                android:clipToOutline="true"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:id="@+id/imgAi"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/aicoach"
+                    android:contentDescription="AI Coach"/>
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvTagAi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AI COACH"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:background="@drawable/bg_chip_blue"
+                android:textColor="#0F172A"
+                app:layout_constraintStart_toEndOf="@id/leftBlockAi"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="12dp"/>
+
+            <TextView
+                android:id="@+id/tvTitleAi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="AI Pronunciation Coach"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#111827"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@id/leftBlockAi"
+                app:layout_constraintTop_toBottomOf="@id/tvTagAi"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/tvDescAi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Say it — I help you say it better!"
+                android:textSize="13sp"
+                android:textColor="#6B7280"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toEndOf="@id/leftBlockAi"
+                app:layout_constraintTop_toBottomOf="@id/tvTitleAi"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/tvActionAi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start Practice →"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="#2563EB"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="6dp"
+                app:layout_constraintStart_toEndOf="@id/leftBlockAi"
+                app:layout_constraintTop_toBottomOf="@id/tvDescAi"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>-->
+
+</LinearLayout>
