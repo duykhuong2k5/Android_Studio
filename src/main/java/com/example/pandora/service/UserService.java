@@ -12,7 +12,7 @@ public class UserService {
     private UserRepository userRepository;
 
     public String register(User user) {
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+        if (userRepository.findByEmail(user.getEmail()) != null) {
             return "Email đã tồn tại!";
         }
         userRepository.save(user);
@@ -20,7 +20,7 @@ public class UserService {
     }
 
     public String login(String email, String password) {
-        Optional<User> user = userRepository.findByEmail(email);
+        Optional<User> user = Optional.ofNullable(userRepository.findByEmail(email));
         if (user.isPresent() && user.get().getPassword().equals(password)) {
             return "Đăng nhập thành công!";
         }

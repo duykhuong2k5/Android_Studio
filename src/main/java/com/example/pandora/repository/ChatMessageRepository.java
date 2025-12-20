@@ -45,4 +45,8 @@ public interface ChatMessageRepository extends JpaRepository<ChatMessage, Long> 
           AND c.productId = :productId
     """)
     boolean existsConversationForProduct(Long userId, Long adminId, Long productId);
+
+    // 📋 Lấy danh sách productId có tin nhắn (không trùng)
+    @Query("SELECT DISTINCT c.productId FROM ChatMessage c WHERE c.productId IS NOT NULL")
+    List<Long> findDistinctProductIds();
 }
