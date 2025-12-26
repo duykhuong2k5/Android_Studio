@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:background="@drawable/bg_item_border"
+    android:layout_marginBottom="16dp">
+
+    <!-- Hình ảnh sản phẩm -->
+    <ImageView
+        android:id="@+id/imgProduct"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/placeholder"
+        android:layout_gravity="center_vertical"/>
+
+    <!-- Thông tin sản phẩm (Tên, Giá) -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingStart="10dp"
+        android:gravity="center_vertical">
+
+        <!-- Tên sản phẩm -->
+        <TextView
+            android:id="@+id/tvName"
+            android:text="Tên sản phẩm"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/onSurface"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- Giá sản phẩm -->
+        <TextView
+            android:id="@+id/tvPrice"
+            android:text="100.000₫"
+            android:textColor="@color/purple_700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- Mức giảm giá nếu có -->
+        <TextView
+            android:id="@+id/tvDiscount"
+            android:text="Giảm 20%"
+            android:textColor="@android:color/holo_red_dark"
+            android:visibility="gone"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <!-- Các nút Sửa và Xóa -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical">
+
+        <!-- Nút sửa -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEdit"
+            android:text="Sửa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_marginBottom="8dp"
+            app:icon="@drawable/ic_edit"
+            app:backgroundTint="@color/purple_500"
+            app:iconTint="@android:color/white"
+            android:textColor="@android:color/white"
+            app:cornerRadius="4dp"
+            android:minHeight="36dp"/>
+
+        <!-- Nút xóa -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDelete"
+            android:text="Xóa"
+            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            app:icon="@drawable/ic_delete"
+            app:backgroundTint="@color/error"
+            app:iconTint="@android:color/white"
+            app:cornerRadius="4dp"
+            android:minHeight="36dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

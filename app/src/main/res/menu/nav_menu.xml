@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- ⭐ NHÓM DANH MỤC GỐC -->
+    <group android:id="@+id/group_category"
+        android:title="DANH MỤC CHÍNH">
+
+        <item
+            android:id="@+id/nav_christmas"
+            android:title="Giáng Sinh"
+            android:icon="@drawable/ic_christmas"/>
+
+        <item
+            android:id="@+id/nav_jewelry"
+            android:title="Trang Sức"
+            android:icon="@drawable/ic_jewelry"/>
+
+        <item
+            android:id="@+id/nav_bracelet"
+            android:title="Vòng Tay Pandora"
+            android:icon="@drawable/ic_bracelet"/>
+
+        <item
+            android:id="@+id/nav_charms"
+            android:title="Charm"
+            android:icon="@drawable/ic_charm"/>
+
+        <item
+            android:id="@+id/nav_necklace"
+            android:title="Dây Chuyền"
+            android:icon="@drawable/ic_necklace"/>
+
+        <item
+            android:id="@+id/nav_earrings"
+            android:title="Hoa Tai"
+            android:icon="@drawable/ic_earring"/>
+
+        <item
+            android:id="@+id/nav_ring"
+            android:title="Nhẫn"
+            android:icon="@drawable/ic_ring"/>
+    </group>
+
+    <!-- ⭐ NHÓM MỚI: DANH MỤC MỞ RỘNG -->
+    <group
+        android:id="@+id/group_expand"
+        android:title="DANH MỤC MỞ RỘNG">
+
+        <item
+            android:id="@+id/nav_product_line"
+            android:title="Dòng Sản Phẩm"
+            android:icon="@drawable/ic_collection" />
+
+        <item
+            android:id="@+id/nav_collaboration"
+            android:title="Collaboration"
+            android:icon="@drawable/ic_collab" />
+
+        <item
+            android:id="@+id/nav_special_event"
+            android:title="Dịp Đặc Biệt"
+            android:icon="@drawable/ic_special" />
+
+        <item
+            android:id="@+id/nav_couple_jewelry"
+            android:title="Trang Sức Đôi"
+            android:icon="@drawable/ic_couple" />
+
+        <item
+            android:id="@+id/nav_combo"
+            android:title="Combo Đặc Biệt"
+            android:icon="@drawable/ic_combo" />
+    </group>
+
+    <!-- Ngăn cách -->
+    <item
+        android:id="@+id/nav_divider"
+        android:enabled="false"
+        android:icon="@drawable/ic_divider"
+        android:title=""/>
+
+    <item
+        android:id="@+id/nav_favorite"
+        android:title="Yêu thích"
+        android:icon="@drawable/ic_favorite_red" />
+
+    <!-- Đăng xuất -->
+    <item
+        android:id="@+id/nav_logout"
+        android:title="Đăng xuất"
+        android:icon="@drawable/ic_logout"
+        android:checkable="false"
+        android:iconTint="@color/primary"/>
+</menu>

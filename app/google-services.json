@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "858475509580",
+    "project_id": "pandora-9275d",
+    "storage_bucket": "pandora-9275d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:858475509580:android:ba2021448124d6abf941e9",
+        "android_client_info": {
+          "package_name": "com.example.pandora"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3T7ML5nalJyL76XKDJgkjiwwF_vqyEjI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
