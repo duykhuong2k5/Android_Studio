@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="30dp"
+    app:cardElevation="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:background="#FFFFFF">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create New Character! 🦸‍♀️"
+            android:textSize="22sp"
+            android:textColor="#E91E63"
+            android:textStyle="bold"
+            android:layout_gravity="center" />
+
+        <EditText android:id="@+id/edtName" android:layout_width="match_parent" android:layout_height="55dp" android:layout_marginTop="15dp" android:hint="Character's Name" android:background="@drawable/bg_rounded_input" android:paddingHorizontal="16dp" android:inputType="textCapWords" />
+        <EditText android:id="@+id/edtAge" android:layout_width="match_parent" android:layout_height="55dp" android:layout_marginTop="10dp" android:hint="Age (e.g. 5)" android:background="@drawable/bg_rounded_input" android:paddingHorizontal="16dp" android:inputType="number" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Role in Story:"
+            android:textStyle="bold"
+            android:textColor="#4A569D"/>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cgRole"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:singleSelection="true"
+            app:selectionRequired="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipHero"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hero 🦸‍♂️"
+                android:checked="true"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipSidekick"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sidekick 🤝"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipExplorer"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Explorer 🧭"/>
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="Gender:" android:textStyle="bold" android:textColor="#4A569D"/>
+        <RadioGroup android:id="@+id/rgGender" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center">
+            <RadioButton android:id="@+id/rbBoy" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Boy 👦" android:checked="true" android:layout_marginEnd="20dp"/>
+            <RadioButton android:id="@+id/rbGirl" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Girl 👧"/>
+        </RadioGroup>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="20dp" android:orientation="horizontal">
+            <Button android:id="@+id/dialogBtnCancel" style="@style/Widget.MaterialComponents.Button.TextButton" android:layout_width="0dp" android:layout_height="55dp" android:layout_weight="1" android:text="Cancel" android:textColor="#FF5252" />
+            <Button android:id="@+id/btnConfirmAdd" android:layout_width="0dp" android:layout_height="55dp" android:layout_weight="1" android:layout_marginStart="10dp" android:text="Create! ✨" android:textColor="#000000" android:textStyle="bold" app:cornerRadius="25dp" android:backgroundTint="#FFD700" />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardStyle"
+    android:layout_width="140dp"
+    android:layout_height="80dp"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="4dp"
+    app:strokeColor="#FFD700"
+    app:strokeWidth="0dp"> <RelativeLayout
+    android:id="@+id/layoutBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="12dp">
+
+    <TextView
+        android:id="@+id/tvStyleName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Funny 😂"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:shadowColor="#40000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textStyle="bold" />
+
+</RelativeLayout>
+</com.google.android.material.card.MaterialCardView>

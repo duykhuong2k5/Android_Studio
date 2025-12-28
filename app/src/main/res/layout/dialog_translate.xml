@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="30dp"
+    android:layout_margin="10dp"
+    app:cardBackgroundColor="#E0F7FA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="25dp"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@android:drawable/ic_menu_search"
+            app:tint="@color/action_green" />
+
+        <TextView
+            android:id="@+id/txtSelectedWord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apple"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary"
+            android:layout_marginTop="10dp"/>
+
+        <View
+            android:layout_width="100dp"
+            android:layout_height="2dp"
+            android:background="#B2EBF2"
+            android:layout_marginVertical="15dp"/>
+
+        <TextView
+            android:id="@+id/txtTranslatedResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quả táo 🍎"
+            android:textSize="22sp"
+            android:textColor="#00796B"
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/btnCloseDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Great! ✨"
+            android:layout_marginTop="20dp"
+            app:cornerRadius="20dp"
+            android:backgroundTint="@color/action_green"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -2,7 +2,7 @@ package com.example.pandora.data.repository
 
 import com.example.pandora.data.entity.FinishDayRequest
 import com.example.pandora.data.entity.StartDayRequest
-import com.example.pandora.data.entity.network.GameApi
+import com.example.pandora.data.network.GameApi
 
 class DayGameRepository(
     private val api: GameApi
