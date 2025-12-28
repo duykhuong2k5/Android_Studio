@@ -2,30 +2,30 @@ package com.example.pandora.data.network;
 
 import com.example.pandora.data.entity.Address;
 import com.example.pandora.data.entity.ChatMessage;
+import com.example.pandora.data.entity.CreateStoryRequest;
 import com.example.pandora.data.entity.FavoriteDTO;
 import com.example.pandora.data.entity.GameFinishRequest;
 import com.example.pandora.data.entity.GameSessionResponse;
 import com.example.pandora.data.entity.GameStartRequest;
 import com.example.pandora.data.entity.LoginRequest;
-import com.example.pandora.data.entity.OrderDTO;
 import com.example.pandora.data.entity.ProductImage;
 import com.example.pandora.data.entity.ProductSize;
 import com.example.pandora.data.entity.ResponseDTO;
 import com.example.pandora.data.entity.RevenueSummaryResponse;
 import com.example.pandora.data.entity.ReviewRequest;
+import com.example.pandora.data.entity.StoryResponse;
+import com.example.pandora.data.entity.TextToSpeechRequest;
 import com.example.pandora.data.entity.TransactionCreateRequest;
 import com.example.pandora.data.entity.User;
 import com.example.pandora.data.entity.Product;
 import com.example.pandora.data.entity.ProductDetail;
 import com.example.pandora.data.entity.Order;
 import com.example.pandora.data.entity.OrderRequest;
-import com.example.pandora.data.entity.Favorite;
 import com.example.pandora.data.entity.FavoriteRequest;
 import com.example.pandora.data.entity.Review;
 import com.example.pandora.data.entity.VocabularyWordResponse;
 import com.example.pandora.data.entity.VoucherDTO;
 import com.example.pandora.data.entity.VoucherResponseDTO;
-import com.example.pandora.data.entity.network.ApiResponse;
 
 import java.util.List;
 import java.util.Map;
@@ -319,5 +319,27 @@ public interface ApiService {
             @Query("month") String month
     );
 
+    @POST("stories/create")
+    Call<ApiResponse<StoryResponse>> createStory(@Body CreateStoryRequest request);
 
+    @GET("stories/{id}")
+    Call<ApiResponse<StoryResponse>> getStoryById(@Path("id") int id);
+
+    @GET("stories/user/{userId}")
+    Call<ApiResponse<List<StoryResponse>>> getUserStories(@Path("userId") int userId);
+
+    @DELETE("stories/{id}")
+    Call<ApiResponse<Void>> deleteStory(@Path("id") int id);
+
+    @GET("stories/topics")
+    Call<ApiResponse<List<String>>> getTopics();
+
+    @GET("stories/styles")
+    Call<ApiResponse<List<String>>> getStyles();
+
+    @POST("stories/audio")
+    Call<ApiResponse<String>> generateAudio(@Body TextToSpeechRequest request);
+
+    @GET("api/stories/user/{userId}")
+    Call<ApiResponse<List<StoryResponse>>> getStoriesByUserId(@Path("userId") int userId);
 }

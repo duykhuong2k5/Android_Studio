@@ -1,15 +1,17 @@
 package com.example.pandora.data.network;
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import com.example.pandora.data.network.ApiService;
+
 public class RetrofitClient {
 
     // ⚠️ Nếu dùng giả lập Android Studio: 10.0.2.2
     // Nếu dùng điện thoại thật: thay bằng IP thật của máy tính, ví dụ: 192.168.1.5
-    private static final String BASE_URL = "http://10.0.2.2:8080/api/";
+    private static final String BASE_URL = "http://10.0.2.2:8081/api/";
 
     private static RetrofitClient instance;
     private final ApiService apiService;
@@ -21,6 +23,9 @@ public class RetrofitClient {
 
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(logging)
+                .connectTimeout(120, TimeUnit.SECONDS) // Chờ kết nối 2 phút
+                .readTimeout(120, TimeUnit.SECONDS)    // Chờ đọc dữ liệu 2 phút
+                .writeTimeout(120, TimeUnit.SECONDS)   // Chờ gửi dữ liệu 2 phút
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()

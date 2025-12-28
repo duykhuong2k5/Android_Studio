@@ -1,4 +1,4 @@
-package com.example.pandora.data.entity.network;
+package com.example.pandora.data.network;
 
 public class ApiResponse<T> {
     public boolean success;

@@ -14,13 +14,12 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pandora.R;
-import com.example.pandora.data.entity.GameFinishRequest;
 import com.example.pandora.data.entity.GameSessionResponse;
 import com.example.pandora.data.entity.GameStartRequest;
 import com.example.pandora.data.entity.VocabularyWordResponse;
 import com.example.pandora.data.entity.enums.DifficultyLevel;
 import com.example.pandora.data.entity.enums.GameType;
-import com.example.pandora.data.entity.network.ApiResponse;
+import com.example.pandora.data.network.ApiResponse;
 import com.example.pandora.data.network.RetrofitClient;
 
 import java.util.List;

@@ -1,8 +1,10 @@
-package com.example.pandora.data.entity.network
+package com.example.pandora.data.network
 
 import com.example.pandora.data.entity.AiQuestionResponse
 import com.example.pandora.data.entity.FinishDayRequest
 import com.example.pandora.data.entity.StartDayRequest
+import com.example.pandora.data.entity.DaySessionResponse
+
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
