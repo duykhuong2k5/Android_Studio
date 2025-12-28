@@ -49,8 +49,17 @@
                     android:layout_marginTop="8dp"
                     app:singleSelection="true"
                     app:selectionRequired="true">
-                    <com.google.android.material.chip.Chip android:id="@+id/chipAnimals" style="@style/Widget.MaterialComponents.Chip.Choice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Animals 🐶" />
+
+                    <com.google.android.material.chip.Chip android:id="@+id/chipAnimals" style="@style/Widget.MaterialComponents.Chip.Choice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Animals 🐶" android:checked="true"/>
                     <com.google.android.material.chip.Chip android:id="@+id/chipSchool" style="@style/Widget.MaterialComponents.Chip.Choice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="School 🎒" />
+                    <com.google.android.material.chip.Chip android:id="@+id/chipSpace" style="@style/Widget.MaterialComponents.Chip.Choice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Space 🚀" />
+                    <com.google.android.material.chip.Chip android:id="@+id/chipOcean" style="@style/Widget.MaterialComponents.Chip.Choice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ocean 🌊" />
+                    <com.google.android.material.chip.Chip android:id="@+id/chipForest" style="@style/Widget.MaterialComponents.Chip.Choice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Forest 🌲" />
+                    <com.google.android.material.chip.Chip android:id="@+id/chipDinosaurs" style="@style/Widget.MaterialComponents.Chip.Choice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Dinosaurs 🦖" />
+                    <com.google.android.material.chip.Chip android:id="@+id/chipRobots" style="@style/Widget.MaterialComponents.Chip.Choice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Robots 🤖" />
+                    <com.google.android.material.chip.Chip android:id="@+id/chipCandy" style="@style/Widget.MaterialComponents.Chip.Choice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Candy 🍭" />
+                    <com.google.android.material.chip.Chip android:id="@+id/chipPirates" style="@style/Widget.MaterialComponents.Chip.Choice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Pirates 🏴‍☠️" />
+                    <com.google.android.material.chip.Chip android:id="@+id/chipKingdom" style="@style/Widget.MaterialComponents.Chip.Choice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Kingdom 🏰" />
                 </com.google.android.material.chip.ChipGroup>
 
                 <TextView
@@ -98,8 +107,11 @@
             android:id="@+id/btnGenerate"
             android:layout_width="match_parent"
             android:layout_height="70dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/bg_magic_button"
             android:text="MAGIC CREATE! ✨"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

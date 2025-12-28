@@ -340,4 +340,6 @@ public interface ApiService {
     @POST("stories/audio")
     Call<ApiResponse<String>> generateAudio(@Body TextToSpeechRequest request);
 
+    @GET("api/stories/user/{userId}")
+    Call<ApiResponse<List<StoryResponse>>> getStoriesByUserId(@Path("userId") int userId);
 }

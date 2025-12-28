@@ -20,7 +20,7 @@
 
         <!-- 🔹 Login là Activity khởi động -->
         <activity
-            android:name="ui.story.CreateStoryActivity"
+            android:name="ui.story.StoryLibraryActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -78,6 +78,7 @@
         <activity android:name=".ui.category.SubCategoryActivity" />
 
         <activity android:name="ui.story.StoryDetailActivity" android:exported="false" />
+        <activity android:name="ui.story.CreateStoryActivity" android:exported="false" />
 
 
 
