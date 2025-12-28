@@ -126,11 +126,11 @@
 			<version>3.2.1</version>
 		</dependency>
 		
-		<!-- Google Cloud Text-to-Speech for Story Audio Generation -->
+		<!-- gTTS - Free Google Text-to-Speech -->
 		<dependency>
-			<groupId>com.google.cloud</groupId>
-			<artifactId>google-cloud-texttospeech</artifactId>
-			<version>2.30.0</version>
+			<groupId>net.bramp.ffmpeg</groupId>
+			<artifactId>ffmpeg</artifactId>
+			<version>0.7.0</version>
 		</dependency>
 		
 		<!-- Jackson for JSON processing (OpenAI API responses) -->

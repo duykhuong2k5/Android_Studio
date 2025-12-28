@@ -38,6 +38,13 @@ public class GeminiService {
      */
     public Map<String, String> generateStoryContent(CreateStoryRequest request) {
         try {
+            log.info("🔧 Gemini API Configuration:");
+            log.info("   - API URL: {}", geminiApiUrl);
+            log.info("   - API Key: {}...{}", 
+                geminiApiKey != null && geminiApiKey.length() > 8 ? geminiApiKey.substring(0, 8) : "MISSING",
+                geminiApiKey != null && geminiApiKey.length() > 4 ? geminiApiKey.substring(geminiApiKey.length() - 4) : "");
+            log.info("   - Model: {}", model);
+            
             String prompt = buildStoryPrompt(request);
             
             // Gemini API request format
@@ -48,10 +55,10 @@ public class GeminiService {
             
             requestBody.put("contents", List.of(content));
             
-            // Generation config
+            // Generation config - 8192 tokens to handle bilingual Vietnamese stories
             Map<String, Object> generationConfig = new HashMap<>();
             generationConfig.put("temperature", 0.8);
-            generationConfig.put("maxOutputTokens", 2000);
+            generationConfig.put("maxOutputTokens", 8192);
             requestBody.put("generationConfig", generationConfig);
 
             String urlWithKey = geminiApiUrl + "?key=" + geminiApiKey;
@@ -63,17 +70,27 @@ public class GeminiService {
             HttpEntity<Map<String, Object>> entity = new HttpEntity<>(requestBody, headers);
             
             log.info("Calling Gemini API to generate story...");
+            log.debug("Gemini API URL: {}", geminiApiUrl);
+            log.debug("Request body: {}", objectMapper.writeValueAsString(requestBody));
+            
             ResponseEntity<String> response = restTemplate.exchange(
                 urlWithKey,
                 HttpMethod.POST,
                 entity,
                 String.class
             );
+            
+            log.info("Gemini API response received successfully");
+            log.debug("Response body: {}", response.getBody());
 
             return parseStoryResponse(response.getBody());
 
         } catch (Exception e) {
-            log.error("Error generating story with Gemini: ", e);
+            log.error("❌ CRITICAL ERROR generating story with Gemini API!");
+            log.error("Error type: {}, Message: {}", 
+                e.getClass().getSimpleName(), e.getMessage());
+            log.error("Full stack trace: ", e);
+            log.warn("⚠️ Falling back to DEFAULT story content - Story will NOT contain AI-generated content!");
             return getDefaultStory(request);
         }
     }
@@ -146,9 +163,10 @@ public class GeminiService {
         prompt.append("\nRequirements:\n");
         prompt.append("1. Create a story suitable for children aged 4-8 years\n");
         prompt.append("2. Include educational elements and positive values\n");
-        prompt.append("3. Keep the story between 300-500 words\n");
+        prompt.append("3. Keep the story between 200-300 words (SHORT AND COMPLETE)\n");
         prompt.append("4. Use simple, engaging language\n");
-        prompt.append("5. Provide both English and Vietnamese versions\n\n");
+        prompt.append("5. Provide both English and Vietnamese versions\n");
+        prompt.append("6. IMPORTANT: Ensure the JSON is complete and properly closed\n\n");
         
         prompt.append("Please respond in this EXACT JSON format:\n");
         prompt.append("{\n");
@@ -169,6 +187,12 @@ public class GeminiService {
                                .path("content").path("parts").get(0)
                                .path("text").asText();
             
+            log.info("=== RAW GEMINI RESPONSE START ===");
+            log.info("Response length: {} characters", content.length());
+            log.info("First 500 chars: {}", content.length() > 500 ? content.substring(0, 500) : content);
+            log.info("Last 200 chars: {}", content.length() > 200 ? content.substring(Math.max(0, content.length() - 200)) : content);
+            log.info("=== RAW GEMINI RESPONSE END ===");
+            
             // Try to parse JSON from content
             content = content.trim();
             if (content.startsWith("```json")) {
@@ -181,6 +205,8 @@ public class GeminiService {
                 content = content.substring(0, content.length() - 3);
             }
             content = content.trim();
+            
+            log.info("Cleaned content for JSON parsing: {} chars", content.length());
 
             JsonNode storyData = objectMapper.readTree(content);
             
@@ -198,10 +224,23 @@ public class GeminiService {
                 result.put("genres", String.join(",", genres));
             }
             
+            log.info("✓ Successfully parsed story - Title: {}, Content length EN: {}, VI: {}", 
+                result.get("titleEn"), 
+                result.get("contentEn") != null ? result.get("contentEn").length() : 0,
+                result.get("contentVi") != null ? result.get("contentVi").length() : 0);
+            
             return result;
         } catch (Exception e) {
-            log.error("Error parsing Gemini response: ", e);
-            throw new RuntimeException("Failed to parse story content from AI response");
+            log.error("✗ Error parsing Gemini response: {} - {}", e.getClass().getSimpleName(), e.getMessage());
+            
+            // Check if it's JSON truncation error
+            if (e.getMessage().contains("Unexpected end-of-input") || e.getMessage().contains("EOF")) {
+                log.error("⚠️ RESPONSE TRUNCATED - JSON incomplete! Gemini likely hit maxOutputTokens limit.");
+                log.error("⚠️ Consider increasing maxOutputTokens or shortening story requirements.");
+            }
+            
+            log.error("Full stack trace: ", e);
+            throw new RuntimeException("Failed to parse story content from AI response: " + e.getMessage());
         }
     }
 

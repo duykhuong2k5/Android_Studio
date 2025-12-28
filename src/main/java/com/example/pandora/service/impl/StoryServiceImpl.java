@@ -38,7 +38,11 @@ public class StoryServiceImpl implements StoryService {
         log.info("Creating new story with topic: {} and style: {}", request.getTopic(), request.getStyle());
 
         // 1. Generate story content using AI
+        log.info("Calling Gemini service to generate story content...");
         Map<String, String> storyContent = geminiService.generateStoryContent(request);
+        log.info("Story content generated - Title EN: {}, Content length: {}", 
+            storyContent.get("titleEn"), 
+            storyContent.get("contentEn") != null ? storyContent.get("contentEn").length() : 0);
 
         // 2. Create Story entity
         Story story = new Story();
@@ -73,38 +77,34 @@ public class StoryServiceImpl implements StoryService {
         }
         story.setCharacters(characters);
 
-        // 4. Generate story thumbnail (async)
-        final Long storyId = story.getId();
-        final String titleEn = story.getTitleEn();
-        final String topic = story.getTopic();
-        final String style = story.getStyle();
-        final List<String> characterNames = characters.stream()
-            .map(StoryCharacter::getName)
-            .collect(Collectors.toList());
-
-        CompletableFuture.runAsync(() -> {
-            try {
-                String thumbnailUrl = imageGenerationService.generateStoryThumbnail(
-                    titleEn, topic, style, characterNames
-                );
-                if (thumbnailUrl != null) {
-                    Story s = storyRepository.findById(storyId).orElse(null);
-                    if (s != null) {
-                        s.setThumbnailUrl(thumbnailUrl);
-                        storyRepository.save(s);
-                        log.info("Thumbnail generated for story {}", storyId);
-                    }
-                }
-            } catch (Exception e) {
-                log.error("Error generating thumbnail: ", e);
+        // 4. Generate story thumbnail (synchronous for immediate response)
+        try {
+            List<String> characterNames = characters.stream()
+                .map(StoryCharacter::getName)
+                .collect(Collectors.toList());
+            
+            String thumbnailUrl = imageGenerationService.generateStoryThumbnail(
+                story.getTitleEn(), story.getTopic(), story.getStyle(), characterNames
+            );
+            
+            if (thumbnailUrl != null) {
+                story.setThumbnailUrl(thumbnailUrl);
+                // No need to save again - entity is already managed by JPA
+                log.info("Thumbnail generated for story {}: {}", story.getId(), thumbnailUrl);
             }
-        });
+        } catch (Exception e) {
+            log.warn("Failed to generate thumbnail, will continue without it: {}", e.getMessage());
+        }
 
-        // 5. Generate audio files (async)
-        // Disabled for now - can enable with Google TTS or other service later
-        // generateAudioFiles(story);
+        // 5. Generate audio files (async - will update story after completion)
+        generateAudioFiles(story);
 
-        return mapToResponse(story);
+        StoryResponse response = mapToResponse(story);
+        log.info("✓ Story created successfully - ID: {}, Thumbnail: {}", 
+            response.getId(), 
+            response.getThumbnailUrl() != null ? "Present" : "NULL");
+
+        return response;
     }
 
     @Override
@@ -191,29 +191,39 @@ public class StoryServiceImpl implements StoryService {
     }
 
     private void generateAudioFiles(Story story) {
+        // Capture content at this point to avoid stale data
+        final String contentEn = story.getContentEn();
+        final String contentVi = story.getContentVi();
+        final Long storyId = story.getId();
+        
+        log.info("Scheduling audio generation for story {} - EN length: {}, VI length: {}", 
+            storyId, 
+            contentEn != null ? contentEn.length() : 0,
+            contentVi != null ? contentVi.length() : 0);
+        
         CompletableFuture.runAsync(() -> {
             try {
                 // Generate English audio
                 String audioEnUrl = textToSpeechService.generateSpeech(
-                    story.getContentEn(), 
+                    contentEn, 
                     "en", 
-                    story.getId().toString()
+                    storyId.toString()
                 );
                 
                 // Generate Vietnamese audio
                 String audioViUrl = textToSpeechService.generateSpeech(
-                    story.getContentVi(), 
+                    contentVi, 
                     "vi", 
-                    story.getId().toString()
+                    storyId.toString()
                 );
 
                 // Update story with audio URLs
-                Story s = storyRepository.findById(story.getId()).orElse(null);
+                Story s = storyRepository.findById(storyId).orElse(null);
                 if (s != null) {
                     s.setAudioUrlEn(audioEnUrl);
                     s.setAudioUrlVi(audioViUrl);
                     storyRepository.save(s);
-                    log.info("Audio files generated for story {}", story.getId());
+                    log.info("Audio files generated for story {}", storyId);
                 }
             } catch (Exception e) {
                 log.error("Error generating audio: ", e);

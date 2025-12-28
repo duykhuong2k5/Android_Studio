@@ -67,45 +67,90 @@ public class ImageGenerationService {
     }
 
     /**
-     * Generate story thumbnail with characters using collage
+     * Generate story thumbnail scene based on story content
+     * Uses AI to create contextual scene with characters
      * Upload to Cloudinary for permanent storage
      */
     public String generateStoryThumbnail(String storyTitle, String topic, String style, List<String> characterNames) {
         try {
-            log.info("Generating story thumbnail with characters: {}", characterNames);
+            log.info("Generating contextual story thumbnail - Topic: {}, Style: {}, Characters: {}", 
+                topic, style, characterNames);
             
-            // Create a colorful thumbnail with full-body character in scene
-            String mainCharacter = characterNames.isEmpty() ? "story" : characterNames.get(0);
-            String seed = mainCharacter.replaceAll("[^a-zA-Z0-9]", "") + topic.replaceAll("[^a-zA-Z0-9]", "");
+            // Build detailed scene prompt for children's book illustration
+            StringBuilder scenePrompt = new StringBuilder();
+            scenePrompt.append("Children's book illustration, ");
+            scenePrompt.append(topic.toLowerCase()).append(" theme, ");
+            scenePrompt.append(style.toLowerCase()).append(" style, ");
             
-            // Use bottts-neutral for full-body robot/character in scene
-            // This style creates complete character with background elements
-            String thumbnailUrl = String.format(
-                "https://api.dicebear.com/7.x/bottts-neutral/svg?seed=%s&backgroundColor=ffdfbf,ffd5dc,c0aede,d1d4f9,b6e3f4&size=1024&scale=100",
-                seed
+            if (!characterNames.isEmpty()) {
+                scenePrompt.append("featuring cute characters ");
+                scenePrompt.append(String.join(" and ", characterNames));
+                scenePrompt.append(" in ");
+            }
+            
+            // Add scene context based on topic
+            String sceneContext = getSceneContext(topic);
+            scenePrompt.append(sceneContext);
+            scenePrompt.append(", colorful, vibrant, kid-friendly, cartoon style, high quality");
+            
+            String prompt = scenePrompt.toString();
+            log.info("Scene prompt: {}", prompt);
+            
+            // Use Pollinations.ai (free text-to-image API)
+            String encodedPrompt = java.net.URLEncoder.encode(prompt, "UTF-8");
+            String imageUrl = String.format(
+                "https://image.pollinations.ai/prompt/%s?width=1024&height=1024&seed=%d&nologo=true",
+                encodedPrompt,
+                Math.abs(prompt.hashCode()) // Consistent seed for same prompt
             );
             
-            log.info("Generated full-body thumbnail URL: {}", thumbnailUrl);
+            log.info("Generated scene-based thumbnail URL");
             
-            // Upload to Cloudinary
+            // Upload to Cloudinary for permanent storage
             String cloudinaryUrl = cloudinaryService.uploadImageFromUrl(
-                thumbnailUrl,
+                imageUrl,
                 "thumbnails/story_" + System.currentTimeMillis()
             );
             
-            log.info("Story thumbnail uploaded: {}", cloudinaryUrl);
+            log.info("Story thumbnail uploaded to Cloudinary: {}", cloudinaryUrl);
             return cloudinaryUrl;
 
         } catch (Exception e) {
-            log.error("Error generating story thumbnail: ", e);
-            // Fallback to bottts-neutral
-            String mainCharacter = characterNames.isEmpty() ? "story" : characterNames.get(0);
-            String seed = mainCharacter.replaceAll("[^a-zA-Z0-9]", "");
-            return String.format(
-                "https://api.dicebear.com/7.x/bottts-neutral/svg?seed=%s&backgroundColor=ffd5dc&size=1024",
-                seed
+            log.error("Error generating story thumbnail, using fallback: ", e);
+            // Fallback: Use simple scene illustration
+            String fallbackPrompt = String.format(
+                "children's book cover, %s, cute, colorful",
+                topic
             );
+            try {
+                String encodedPrompt = java.net.URLEncoder.encode(fallbackPrompt, "UTF-8");
+                return String.format(
+                    "https://image.pollinations.ai/prompt/%s?width=1024&height=1024&nologo=true",
+                    encodedPrompt
+                );
+            } catch (Exception ex) {
+                log.error("Fallback also failed, using default", ex);
+                return "https://via.placeholder.com/1024x1024/FFB6C1/000000?text=Story+Cover";
+            }
         }
+    }
+    
+    /**
+     * Get scene context description based on story topic
+     */
+    private String getSceneContext(String topic) {
+        return switch (topic.toLowerCase()) {
+            case "animals" -> "a magical forest with animals playing together";
+            case "school" -> "a colorful classroom with students learning and having fun";
+            case "adventure" -> "an exciting adventure scene with exploration";
+            case "family" -> "a warm family scene at home";
+            case "friendship" -> "friends playing and laughing together";
+            case "nature" -> "a beautiful natural landscape with wildlife";
+            case "space" -> "a whimsical space scene with planets and stars";
+            case "ocean" -> "an underwater scene with sea creatures";
+            case "fantasy" -> "a magical fantasy world with enchanting elements";
+            default -> "a charming scene that captures the story's essence";
+        };
     }
 
     /**
