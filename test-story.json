@@ -1,0 +1,13 @@
+{
+  "topic": "Animals",
+  "style": "Funny",
+  "userId": 1,
+  "characters": [
+    {
+      "name": "Leo",
+      "age": "5",
+      "gender": "Boy",
+      "role": "Hero"
+    }
+  ]
+}
